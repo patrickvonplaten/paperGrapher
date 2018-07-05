@@ -6,21 +6,40 @@ export default class GraphSurface extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResult: this.props.searchResult
+      papers: this.props.papers
     };
   }
 
-  const 
+  fromArrayToGraphdictionary(papers) {
+    var nodes = [];
 
+    var edges = [];
+    var edge_counter = 0;
 
+    var i;
+    for (i = 0; i < papers.length; i++) {
+      var current_id = papers[i]["id"];
+      nodes[i] = {id: current_id, label: papers[i]["title"]};
+      console.log(nodes[i]);
+
+      var j;
+      for (j = 0; j < papers[i]["childrenPapers"].length; j++) {
+        var child_id = papers[i]["childrenPapers"][j];
+        var id_label = current_id + "-" + child_id;
+
+        edges[edge_counter++] = {id: edge_counter, source: current_id, target:child_id, label: id_label};
+      }
+    }
+
+    const graph = {nodes: nodes, edges: edges}    
+    return graph;
+  }
 
   render() {
-    console.log("SearchObject", this.state.searchResult)
+    console.log("Papers", this.state.papers)
 
-    let myGraph = { nodes: [{ id: "n1", label: "Alice" }, 
-                            { id: "n2", label: "Rabbit" }],
-                    edges: [{ id: "e1", source: "n1", target: "n2", label: "SEES" }] };
-
+    let paper1 = this.state.papers[1];
+    let myGraph = this.fromArrayToGraphdictionary(this.state.papers);
 
     return (
         isBrowser ? (
@@ -30,7 +49,6 @@ export default class GraphSurface extends React.Component {
             <Sigma.RelativeSize initialSize={15} />
             <Sigma.RandomizeNodePositions />
           </Sigma.Sigma>
-          <div> {this.state.searchResult.title} </div>
         </div>
       ) : null
     );
