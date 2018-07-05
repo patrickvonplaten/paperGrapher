@@ -10,10 +10,16 @@ export default class GraphSurface extends React.Component {
     };
   }
 
+  const 
+
+
+
   render() {
     console.log("SearchObject", this.state.searchResult)
 
-    let myGraph = { nodes: [{ id: "n1", label: "Alice" }, { id: "n2", label: "Rabbit" }], edges: [{ id: "e1", source: "n1", target: "n2", label: "SEES" }] };
+    let myGraph = { nodes: [{ id: "n1", label: "Alice" }, 
+                            { id: "n2", label: "Rabbit" }],
+                    edges: [{ id: "e1", source: "n1", target: "n2", label: "SEES" }] };
 
 
     return (
