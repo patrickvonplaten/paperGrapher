@@ -1,5 +1,4 @@
 
-
 const parsePapersToGraph = (papers) => {
   var nodes = [];
   var edges = [];
@@ -30,8 +29,6 @@ const parsePapersToGraph = (papers) => {
     nodes:  nodes,
     edges:  edges
   } 
-
-  return graph
 }
 
 module.exports = {
